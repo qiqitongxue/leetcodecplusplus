@@ -1,0 +1,35 @@
+//LeetCode C++ 346 数据流滑动窗口平均值 Moving Average from Data Stream
+class MovingAverage {
+public:
+    /** Initialize your data structure here. */
+    
+    queue <int> window;
+    int max_size;
+    double sum;
+    
+    MovingAverage(int size) {
+        max_size = size;
+        sum = 0;
+    }
+    
+    double next(int val) {
+        
+        if (window.size() == max_size) {
+            int oldest_element = window.front();
+            window.pop();
+            sum -= oldest_element;
+        }
+        
+        window.push(val);
+        sum += val;
+        
+        return sum / window.size();
+    }
+};
+
+/**
+ * Your MovingAverage object will be instantiated and called as such:
+ * MovingAverage* obj = new MovingAverage(size);
+ * double param_1 = obj->next(val);
+ */
+
